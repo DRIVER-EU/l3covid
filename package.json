@@ -1,0 +1,71 @@
+{
+  "name": "l3-covid-19",
+  "version": "0.0.1",
+  "description": "Capture, store and share your COVID-19 lessons in a simple to use web application.",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf ./public ./.cache ./dist",
+    "start": "concurrently \"npm run serve\" \"parcel index.html\"",
+    "build": "parcel build index.html --out-dir ./public",
+    "build:domain": "npm run clean && npm run build",
+    "link": "npm link mithril-ui-form",
+    "serve": "rest-easy-loki",
+    "keycloak": "docker-compose up -d -f ./docker/docker-compose.yaml",
+    "docker:build": "docker build -t l3crisis .",
+    "docker:tag": "docker tag l3crisis drivereu/l3crisis",
+    "docker:publish": "docker push drivereu/l3crisis",
+    "docker": "npm run docker:local && npm run docker:publish",
+    "docker:local": "npm run docker:build && npm run docker:tag",
+    "docker:run": "docker run --name l3 -it -p 3000:3000 l3crisis",
+    "docker:sh": "docker run -it l3crisis sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DRIVER-EU/lessons-learned-framework.git"
+  },
+  "keywords": [
+    "CMS",
+    "REST",
+    "database",
+    "lokijs",
+    "dynamic",
+    "forms"
+  ],
+  "author": "Erik Vullings <erik.vullings@gmail.com> (http://www.tno.nl)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DRIVER-EU/lessons-learned-framework/issues"
+  },
+  "homepage": "https://github.com/DRIVER-EU/lessons-learned-framework#readme",
+  "dependencies": {
+    "base64-js": "^1.3.1",
+    "js-sha256": "^0.9.0",
+    "keycloak-js": "9.0.3",
+    "leaflet": "^1.6.0",
+    "leaflet-draw": "^1.0.4",
+    "material-icons": "^0.3.1",
+    "materialize-css": "^1.0.0",
+    "mithril": "^2.0.4",
+    "mithril-leaflet": "^0.3.0",
+    "mithril-materialized": "^0.16.1",
+    "mithril-ui-form": "^0.7.1",
+    "rest-easy-loki": "^0.7.6"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.5.12",
+    "@types/lokijs": "^1.5.3",
+    "@types/materialize-css": "^1.0.7",
+    "@types/mithril": "^2.0.2",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
+    "autoprefixer": "^9.7.6",
+    "concurrently": "^5.2.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jsdoc": "^24.0.0",
+    "eslint-plugin-prefer-arrow": "^1.2.0",
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  }
+}
