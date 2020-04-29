@@ -658,7 +658,7 @@ export const llf: Form = [
     type: 'md',
     value: `#### Solution
 
-    Applying to the following crisis management functions, if any.`,
+    Applies to the following crisis management functions, if any.`,
   },
   {
     id: 'response',
