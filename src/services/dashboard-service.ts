@@ -1,11 +1,11 @@
 import m, { ComponentTypes, RouteDefs } from 'mithril';
-import { AboutPage } from '../components/about/about-page';
-import { HelpPage } from '../components/about/help-page';
+// import { AboutPage } from '../components/about/about-page';
+// import { HelpPage } from '../components/about/help-page';
 import { LessonForm } from '../components/edit/lesson-form';
 import { LessonsList } from '../components/home/lessons-list';
 import { HomePage } from '../components/home/home-page';
 import { Layout } from '../components/layout';
-import { EventView } from '../components/show/event-view';
+import { LessonView } from '../components/show/lesson-view';
 import { IDashboard } from '../models/dashboard';
 import { Auth, Login } from './login-service';
 
@@ -78,7 +78,7 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     icon: 'description',
     route: '/read/:id',
     visible: false,
-    component: EventView,
+    component: LessonView,
   },
   {
     id: Dashboards.EDIT,
@@ -88,22 +88,22 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     visible: false,
     component: LessonForm,
   },
-  {
-    id: Dashboards.HELP,
-    title: 'HELP',
-    icon: 'info',
-    route: '/info',
-    visible: true,
-    component: HelpPage,
-  },
-  {
-    id: Dashboards.ABOUT,
-    title: 'ABOUT',
-    icon: 'help',
-    route: '/about',
-    visible: true,
-    component: AboutPage,
-  },
+  // {
+  //   id: Dashboards.HELP,
+  //   title: 'HELP',
+  //   icon: 'info',
+  //   route: '/info',
+  //   visible: true,
+  //   component: HelpPage,
+  // },
+  // {
+  //   id: Dashboards.ABOUT,
+  //   title: 'ABOUT',
+  //   icon: 'help',
+  //   route: '/about',
+  //   visible: true,
+  //   component: AboutPage,
+  // },
   {
     id: Dashboards.HOME,
     default: true,
