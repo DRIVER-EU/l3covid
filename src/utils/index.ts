@@ -1,4 +1,4 @@
-import { IEvent } from '../models';
+import { ILesson } from '../models';
 
 /**
  * Create a GUID
@@ -85,50 +85,21 @@ export const nameAndDescriptionFilter = (filterValue?: string) => {
  * Function to filter on a named type.
  * @param filterValue Filter text
  */
-export const typeFilter = (propName: keyof IEvent, filterValue?: Array<string | number>) => {
+export const typeFilter = (propName: keyof ILesson, filterValue?: Array<string | number>) => {
   if (!filterValue || filterValue.length === 0) {
     return () => true;
   }
   return filterValue instanceof Array
-    ? (c: Partial<IEvent>) =>
+    ? (c: Partial<ILesson>) =>
         c.hasOwnProperty(propName) &&
         (c[propName] instanceof Array
           ? filterValue.reduce((acc, fv) => acc || (c[propName] as Array<string | number>).indexOf(fv) >= 0, false)
           : filterValue.indexOf(c[propName] as string) >= 0)
-    : (c: Partial<IEvent>) =>
+    : (c: Partial<ILesson>) =>
         c.hasOwnProperty(propName) &&
         (c[propName] instanceof Array
           ? (c[propName] as Array<string | number>).indexOf(filterValue) >= 0
           : c[propName] === filterValue);
-};
-
-const getIncidentTypes = ({ initialIncident, otherIncidents }: Partial<IEvent>) => {
-  const incidents = [] as string[];
-  if (initialIncident) {
-    incidents.push(initialIncident);
-  }
-  if (otherIncidents) {
-    if (typeof otherIncidents === 'string') {
-      incidents.push(otherIncidents);
-    } else {
-      incidents.push(...otherIncidents);
-    }
-  }
-  return incidents;
-};
-
-/**
- * Function to filter on incident.
- * @param filterValue Filter text
- */
-export const incidentFilter = (filterValue?: string | string[]) => {
-  if (!filterValue || filterValue.length === 0) {
-    return () => true;
-  }
-  // console.log('Filtering incidents: ' + filterValue);
-  return filterValue instanceof Array
-    ? (c: Partial<IEvent>) => getIncidentTypes(c).reduce((acc, fv) => acc || filterValue.indexOf(fv) >= 0, false)
-    : (c: Partial<IEvent>) => getIncidentTypes(c).indexOf(filterValue) >= 0;
 };
 
 /**

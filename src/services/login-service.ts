@@ -2,7 +2,7 @@ import Keycloak, { KeycloakError, KeycloakInstance } from 'keycloak-js';
 import m, { FactoryComponent } from 'mithril';
 import { EmailInput, FlatButton, Options, TextInput } from 'mithril-materialized';
 import { CircularSpinner } from '../components/ui/preloader';
-import { IEvent } from '../models';
+import { ILesson } from '../models';
 import { Roles } from '../models/roles';
 import { envSvc } from './env-service';
 
@@ -78,18 +78,20 @@ export const Auth = {
     return Auth.roles.indexOf(Roles.EDITOR) >= 0;
   },
   /** Can edit the document, but also change the persons that have access. */
-  isOwner(doc: Partial<IEvent>) {
+  isOwner(doc: Partial<ILesson>) {
     return Auth.isAdmin() || (Auth.isAuthenticated && doc.owner && doc.owner.indexOf(Auth.username) >= 0);
   },
   /** Can edit the document, but also change the persons that have access. */
-  canCRUD(doc: Partial<IEvent>) {
+  canCRUD(doc: Partial<ILesson>) {
     return Auth.isAuthenticated && (Auth.isAdmin() || this.isOwner(doc));
   },
   /** Can edit the document and publish it. */
-  canEdit(doc: Partial<IEvent>) {
+  canEdit(doc: Partial<ILesson>) {
     return (
       Auth.isAuthenticated &&
-      (Auth.canCRUD(doc) || Auth.isEditor() || (doc.canEdit instanceof Array && doc.canEdit.indexOf(Auth.username) >= 0))
+      (Auth.canCRUD(doc) ||
+        Auth.isEditor() ||
+        (doc.canEdit instanceof Array && doc.canEdit.indexOf(Auth.username) >= 0))
     );
   },
   setUsername(username: string) {
@@ -181,7 +183,10 @@ export const Login: FactoryComponent = () => {
                 m(Options, {
                   label: 'Roles',
                   disabled: true,
-                  options: [{ id: Roles.ADMIN, label: 'Administrator' }, { id: Roles.EDITOR, label: 'Editor' }],
+                  options: [
+                    { id: Roles.ADMIN, label: 'Administrator' },
+                    { id: Roles.EDITOR, label: 'Editor' },
+                  ],
                   checkedId: Auth.roles,
                   inline: true,
                 })

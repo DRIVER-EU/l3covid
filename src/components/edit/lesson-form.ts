@@ -2,8 +2,8 @@ import M from 'materialize-css';
 import m from 'mithril';
 import { Button, Chips, ModalPanel } from 'mithril-materialized';
 import { deepCopy, LayoutForm } from 'mithril-ui-form';
-import { IEvent } from '../../models';
-import { EventsSvc } from '../../services';
+import { ILesson } from '../../models';
+import { LessonsSvc } from '../../services';
 import { Dashboards, dashboardSvc } from '../../services/dashboard-service';
 import { Auth } from '../../services/login-service';
 import { llf } from '../../template/llf';
@@ -22,10 +22,10 @@ const close = async (e?: UIEvent) => {
   }
 };
 
-export const EventForm = () => {
+export const LessonForm = () => {
   const state = {
     // hasChanged: false,
-    lesson: {} as Partial<IEvent>,
+    lesson: {} as Partial<ILesson>,
     loaded: false,
     isValid: false,
     form: llf,
@@ -43,17 +43,17 @@ export const EventForm = () => {
       const { lesson } = state;
       saveEditorInfoToLocalStorage(lesson);
       // const event = deepCopy(state.event);
-      await EventsSvc.save(lesson);
-      state.lesson = EventsSvc.getCurrent();
+      await LessonsSvc.save(lesson);
+      state.lesson = LessonsSvc.getCurrent();
     }
   };
 
   return {
     oninit: () => {
       return new Promise(async (resolve, reject) => {
-        const lesson = await EventsSvc.load(m.route.param('id')).catch((r) => reject(r));
+        const lesson = await LessonsSvc.load(m.route.param('id')).catch((r) => reject(r));
         getEditorInfoFromLocalStorage(lesson);
-        state.lesson = lesson ? deepCopy(lesson) : ({} as IEvent);
+        state.lesson = lesson ? deepCopy(lesson) : ({} as ILesson);
         state.loaded = true;
         m.redraw();
         resolve();
@@ -187,7 +187,7 @@ export const EventForm = () => {
             {
               label: 'Delete',
               onclick: async () => {
-                EventsSvc.delete(lesson.$loki);
+                LessonsSvc.delete(lesson.$loki);
                 close();
               },
             },
@@ -200,7 +200,7 @@ export const EventForm = () => {
     },
   };
 };
-function getEditorInfoFromLocalStorage(lesson: void | Partial<IEvent> | undefined) {
+function getEditorInfoFromLocalStorage(lesson: void | Partial<ILesson> | undefined) {
   if (lesson && Auth.isOwner(lesson)) {
     const editor = window.localStorage.getItem(EDITOR_KEY);
     const { name = '', organisation = '', organisationType = '', country = '' } = editor ? JSON.parse(editor) : {};
@@ -211,7 +211,7 @@ function getEditorInfoFromLocalStorage(lesson: void | Partial<IEvent> | undefine
   }
 }
 
-function saveEditorInfoToLocalStorage(lesson: Partial<IEvent>) {
+function saveEditorInfoToLocalStorage(lesson: Partial<ILesson>) {
   if (Auth.isOwner(lesson)) {
     const editor = {
       name: lesson.name,

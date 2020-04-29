@@ -356,7 +356,7 @@ export const incidentTypes = [
   },
 ].sort(sortByLabel);
 
-const societalSectors = [
+export const societalSectors = [
   { id: 'society_whole', label: 'Society as a whole' },
   { id: 'drinking_water', label: 'Drinking water' },
   { id: 'education', label: 'Education/Research' },
@@ -485,14 +485,14 @@ export const cmOperations = [
   { id: 'traffic_mgmt', label: 'Traffic management' },
   { id: 'scale', label: 'Up-scale/Down-scale' },
   { id: 'volunteer_management', label: 'Volunteer management' },
-];
+].sort(sortByLabel);
 
 export const cmPreparations = [
   { id: 'education_training', label: 'Education & Training' },
   { id: 'doctrine', label: 'Doctrine development' },
   { id: 'risk_assessment', label: 'Risk assessment' },
   // { id: "rescue_operations", label: "Rescue operations/SAR" },
-];
+].sort(sortByLabel);
 
 export const cmRecovery = [
   { id: 'economic', label: 'Economic recovery' },
@@ -501,7 +501,7 @@ export const cmRecovery = [
   { id: 'infrastructure', label: 'Infrastructure recovery' },
   { id: 'housing', label: 'Housing recovery' },
   { id: 'natural', label: 'Natural / cultural recovery' },
-];
+].sort(sortByLabel);
 
 const scale = [
   { id: 'local', label: 'Local' },
@@ -601,7 +601,7 @@ export const llf: Form = [
     transform: (dir, value: number) => {
       if (dir === 'from' && value) {
         const d = new Date(value);
-        return `${padLeft(d.getDay())}-${padLeft(d.getMonth() + 1)}-${d.getFullYear()}`;
+        return `${padLeft(d.getDate())}-${padLeft(d.getMonth() + 1)}-${d.getFullYear()}`;
       }
       return value;
     },
@@ -637,7 +637,7 @@ export const llf: Form = [
     options: scale,
   },
   {
-    id: 'sectors',
+    id: 'societalSectors',
     label: 'Affected societal sectors',
     required: true,
     type: 'select',
@@ -646,7 +646,7 @@ export const llf: Form = [
     options: societalSectors,
   },
   {
-    id: 'description',
+    id: 'problem',
     label: 'Description of the problem',
     placeholder: 'Include the situation and the period in which it has occured.',
     required: true,

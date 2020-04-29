@@ -1,8 +1,8 @@
 import m, { ComponentTypes, RouteDefs } from 'mithril';
 import { AboutPage } from '../components/about/about-page';
 import { HelpPage } from '../components/about/help-page';
-import { EventForm } from '../components/edit/event-form';
-import { EventsList } from '../components/home/events-list';
+import { LessonForm } from '../components/edit/lesson-form';
+import { LessonsList } from '../components/home/lessons-list';
 import { HomePage } from '../components/home/home-page';
 import { Layout } from '../components/layout';
 import { EventView } from '../components/show/event-view';
@@ -35,17 +35,17 @@ class DashboardService {
   }
 
   public get defaultRoute() {
-    const dashboard = this.dashboards.filter(d => d.default).shift();
+    const dashboard = this.dashboards.filter((d) => d.default).shift();
     return dashboard ? dashboard.route : this.dashboards[0].route;
   }
 
   public route(dashboardId: Dashboards) {
-    const dashboard = this.dashboards.filter(d => d.id === dashboardId).shift();
+    const dashboard = this.dashboards.filter((d) => d.id === dashboardId).shift();
     return dashboard ? dashboard.route : this.defaultRoute;
   }
 
   public switchTo(dashboardId: Dashboards, params?: { [key: string]: string | number | undefined }) {
-    const dashboard = this.dashboards.filter(d => d.id === dashboardId).shift();
+    const dashboard = this.dashboards.filter((d) => d.id === dashboardId).shift();
     if (dashboard) {
       // console.log(dashboard.route);
       m.route.set(dashboard.route, params);
@@ -53,15 +53,13 @@ class DashboardService {
   }
 
   public get routingTable() {
-    return this.dashboards.reduce(
-      (p, c) => {
-        p[c.route] = c.hasNavBar === false
+    return this.dashboards.reduce((p, c) => {
+      p[c.route] =
+        c.hasNavBar === false
           ? { onmatch: () => window.scrollTo(0, 0), render: () => m(c.component) }
           : { onmatch: () => window.scrollTo(0, 0), render: () => m(this.layout, m(c.component)) };
-        return p;
-      },
-      {} as RouteDefs,
-    );
+      return p;
+    }, {} as RouteDefs);
   }
 }
 
@@ -72,7 +70,7 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     icon: 'home',
     route: '/home',
     visible: true,
-    component: EventsList,
+    component: LessonsList,
   },
   {
     id: Dashboards.READ,
@@ -88,7 +86,7 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     icon: 'edit',
     route: '/edit/:id',
     visible: false,
-    component: EventForm,
+    component: LessonForm,
   },
   {
     id: Dashboards.HELP,
@@ -119,7 +117,7 @@ export const dashboardSvc: DashboardService = new DashboardService(Layout, [
     id: Dashboards.USER,
     title: 'User page',
     route: '/user',
-    icon: () => Auth.isAuthenticated ? 'person' : 'person_outline',
+    icon: () => (Auth.isAuthenticated ? 'person' : 'person_outline'),
     visible: true,
     component: Login,
   },
