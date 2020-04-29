@@ -80,7 +80,7 @@ export const countries = [
   },
   {
     id: 'netherlands',
-    label: 'Netherlands',
+    label: 'The Netherlands',
   },
   {
     id: 'poland',
@@ -688,7 +688,7 @@ export const llf: Form = [
     options: cmRecovery,
   },
   {
-    id: 'description',
+    id: 'solution',
     label: 'Description of the solution',
     type: 'textarea',
   },

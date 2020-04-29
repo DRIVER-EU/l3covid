@@ -119,8 +119,8 @@ The applied solution to the problem was the following: ${p(description)}. ${
     positive ? `This resulted in the following positive result: ${p(positive)}.` : ''
   } ${negative ? `It also lead to the following negative result: ${negative}.` : ''}
 
-Characteristics of the solution:
-${p(response, `- CM function(s): ${l(response)}`)}
+CM functions of the solution:
+${p(response, `- Response: ${l(response)}`)}
 ${p(crossCutting, `- Cross-cutting: ${l(crossCutting)}`)}
 ${p(recovery, `- Recovery: ${l(recovery)}`)}
 

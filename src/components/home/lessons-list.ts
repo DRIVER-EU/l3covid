@@ -7,7 +7,7 @@ import { Dashboards, dashboardSvc } from '../../services/dashboard-service';
 import { LessonsSvc } from '../../services/lessons-service';
 import { Auth } from '../../services/login-service';
 import { cmFunctions, countries, societalSectors, cmOperations } from '../../template/llf';
-import { nameAndDescriptionFilter, typeFilter } from '../../utils';
+import { titleAndSolutionFilter, typeFilter } from '../../utils';
 
 export const LessonsList = () => {
   const state = {
@@ -34,7 +34,7 @@ export const LessonsList = () => {
     view: () => {
       const { countryFilter, societalSectorFilter, cmFunctionFilter, operationsFilter } = state;
       const lessons = (LessonsSvc.getList() || ([] as ILesson[])).sort(sortByName);
-      const query = nameAndDescriptionFilter(state.filterValue);
+      const query = titleAndSolutionFilter(state.filterValue);
       const page = m.route.param('page') ? +m.route.param('page') : 0;
       const filteredLessons =
         lessons
@@ -46,8 +46,8 @@ export const LessonsList = () => {
           .filter(query)
           .filter(typeFilter('memberCountries', countryFilter))
           .filter(typeFilter('societalSectors', societalSectorFilter))
-          .filter(typeFilter('operations', operationsFilter))
-          .filter(typeFilter('cmFunctionPrimary', cmFunctionFilter))
+          .filter(typeFilter('crossCutting', operationsFilter))
+          .filter(typeFilter('response', cmFunctionFilter))
           .slice(page * pageSize, (page + 1) * pageSize) || [];
       return m('.row', { style: 'margin-top: 1em;' }, [
         m(

@@ -11,7 +11,7 @@ class LessonsService extends RestService<Partial<ILesson>> {
 
   public async loadList(): Promise<Array<Partial<ILesson>> | undefined> {
     const filter =
-      'view?props=$loki,title,description,memberCountries,societalSectors,cmFunctionPrimary,operations,owner,published,canEdit';
+      'view?props=$loki,title,solution,memberCountries,societalSectors,crossCutting,response,owner,published,canEdit';
     // http://localhost:3300/lessons/view?props=title,description,memberCountries,societalSectors,cmFunctionPrimary,operations,owner,published,canEdit
     const result = await m
       .request<ILesson[]>({

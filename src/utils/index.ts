@@ -70,15 +70,15 @@ export const range = (from: number, to: number, count: number = to - from + 1, s
  * Function to filter case-insensitive name and description.
  * @param filterValue Filter text
  */
-export const nameAndDescriptionFilter = (filterValue?: string) => {
+export const titleAndSolutionFilter = (filterValue?: string) => {
   if (!filterValue) {
     return () => true;
   }
   const fv = filterValue.toLowerCase() as string;
-  return (content: { name?: string; desc?: string }) =>
-    !content.name ||
-    content.name.toLowerCase().indexOf(fv) >= 0 ||
-    (content.desc && content.desc.toLowerCase().indexOf(fv) >= 0);
+  return (content: { title?: string; solution?: string }) =>
+    !content.title ||
+    content.title.toLowerCase().indexOf(fv) >= 0 ||
+    (content.solution && content.solution.toLowerCase().indexOf(fv) >= 0);
 };
 
 /**
