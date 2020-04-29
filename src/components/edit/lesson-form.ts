@@ -99,17 +99,20 @@ export const LessonForm = () => {
               ),
               m('.buttons', [
                 m(Button, {
+                  iconName: lesson.published ? 'check_box' : 'check_box_outline_blank',
+                  className: 'right col s12',
+                  onclick: async () => {
+                    lesson.published = !lesson.published;
+                    await LessonsSvc.save(lesson);
+                  },
+                  label: lesson.published ? 'Unpublish lesson' : 'Publish lesson',
+                }),
+                m(Button, {
                   label: 'Show lesson',
                   iconName: 'visibility',
                   className: 'right col s12',
                   onclick: () => dashboardSvc.switchTo(Dashboards.READ, { id: lesson.$loki }),
                 }),
-                // m(Button, {
-                //   label: 'Save event',
-                //   iconName: 'save',
-                //   class: `green col s12 ${hasChanged ? '' : 'disabled'}`,
-                //   onclick: onsubmit,
-                // }),
                 m(Button, {
                   modalId: 'delete-lesson',
                   label: 'Delete lesson',
