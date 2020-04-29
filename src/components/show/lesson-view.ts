@@ -9,7 +9,7 @@ import { Auth } from '../../services/login-service';
 import { llf } from '../../template/llf';
 import { CircularSpinner } from '../ui/preloader';
 
-export const EventView: FactoryComponent = () => {
+export const LessonView: FactoryComponent = () => {
   const state = {
     lesson: {} as Partial<ILesson>,
     loaded: false,
