@@ -95,9 +95,8 @@ const formatLesson = (lesson: ILesson) => {
     memberCountries,
     scale,
     societalSectors,
-    cmFunctionPrimary,
-    operations,
-    preparatory,
+    response,
+    crossCutting,
     recovery,
   } = lesson;
   console.log(lesson);
@@ -114,16 +113,15 @@ This ${
     scale && scale.length > 0 ? scale[0].toLowerCase() : scale
   } lesson addresses the following problem in ${mc}, and affects the societal sector ${ss}: ${p(problem)}.
 
-<h5 class="primary-text center-align">Observations / experiences</h5>
+<h5 class="primary-text center-align">Solution</h5>
 
-The observation was the following: ${p(description)}. ${
+The applied solution to the problem was the following: ${p(description)}. ${
     positive ? `This resulted in the following positive result: ${p(positive)}.` : ''
   } ${negative ? `It also lead to the following negative result: ${negative}.` : ''}
 
-Characteristics of the observation:
-${p(cmFunctionPrimary, `- Primary CM function: ${l(cmFunctionPrimary)}`)}
-${p(operations, `- Operations: ${l(operations)}`)}
-${p(preparatory, `- Preparatory: ${l(preparatory)}`)}
+Characteristics of the solution:
+${p(response, `- CM function(s): ${l(response)}`)}
+${p(crossCutting, `- Cross-cutting: ${l(crossCutting)}`)}
 ${p(recovery, `- Recovery: ${l(recovery)}`)}
 
 ${showSources(lesson)}

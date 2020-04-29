@@ -582,7 +582,7 @@ export const llf: Form = [
   { id: 'lesson', type: 'section', label: 'Lesson' },
   {
     type: 'md',
-    value: '#### Lesson / Observation',
+    value: '#### Lesson',
   },
   {
     id: 'title',
@@ -623,6 +623,7 @@ export const llf: Form = [
     label: 'Involved countries',
     required: true,
     type: 'select',
+    multiple: true,
     // checkboxClass: 'col s6 m4 xl3',
     className: 'col s12 m4',
     options: countries,
@@ -641,6 +642,7 @@ export const llf: Form = [
     label: 'Affected societal sectors',
     required: true,
     type: 'select',
+    multiple: true,
     className: 'col s12 m4',
     // checkboxClass: 'col s6 m4 xl3',
     options: societalSectors,
@@ -654,36 +656,27 @@ export const llf: Form = [
   },
   {
     type: 'md',
-    value: `#### Observations / experiences
+    value: `#### Solution
 
     Applying to the following crisis management functions, if any.`,
   },
   {
-    id: 'cmFunctionPrimary',
+    id: 'response',
     type: 'select',
     multiple: true,
     required: true,
-    label: 'Primary (response)',
+    label: 'Response',
     className: 'col s12 m6',
     options: cmFunctions,
   },
   {
-    id: 'operations',
+    id: 'crossCutting',
     type: 'select',
     multiple: true,
     required: true,
-    label: 'Operations enabling',
+    label: 'Cross-cutting',
     className: 'col s12 m6',
     options: cmOperations,
-  },
-  {
-    id: 'preparatory',
-    type: 'select',
-    multiple: true,
-    required: true,
-    label: 'Preparatory',
-    className: 'col s12 m6',
-    options: cmPreparations,
   },
   {
     id: 'recovery',
@@ -696,7 +689,7 @@ export const llf: Form = [
   },
   {
     id: 'description',
-    label: 'Description of the lesson identified',
+    label: 'Description of the solution',
     type: 'textarea',
   },
   {

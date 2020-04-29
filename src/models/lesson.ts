@@ -42,12 +42,11 @@ export interface ILesson extends ILokiObj {
   scale: string;
   /** Societal sectors */
   societalSectors: string[];
-  /** Primary CM function */
-  cmFunctionPrimary: string;
-  /** Enabling operations */
-  operations: string[];
-  /** Preparatory */
-  preparatory: string[];
+  /** Response-related CM function */
+  response: string;
+  /** Cross-cuttion CM functions */
+  crossCutting: string[];
+  /** Recovery CM functions */
   recovery: string[];
   /** Positive effects of the solution */
   positive: string;
