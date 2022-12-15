@@ -49,7 +49,7 @@
     "mithril-leaflet": "^0.3.0",
     "mithril-materialized": "^0.16.1",
     "mithril-ui-form": "^0.7.1",
-    "rest-easy-loki": "^0.7.6"
+    "rest-easy-loki": "^1.4.1"
   },
   "devDependencies": {
     "@types/leaflet": "^1.5.12",
